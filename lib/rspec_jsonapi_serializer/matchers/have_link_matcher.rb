@@ -19,16 +19,28 @@ module RSpecJSONAPISerializer
       end
 
       def as_nil
-        add_submatcher HaveLinkMatchers::AsMatcher.new(expected, nil)
+        as(nil)
+      end
 
-        self
+      def description
+        description = "have link #{expected}"
+
+        [description, submatchers.map(&:description)].flatten.join(' ')
       end
 
       def failure_message
-        "expected #{serializer_name} to have link #{expected}." unless has_link?
+        "Expected #{expectation}."
+      end
+
+      def failure_message_when_negated
+        "Did not expect #{expectation}."
       end
 
       private
+
+      def expectation
+        "#{serializer_name} to have link #{expected}"
+      end
 
       def has_link?
         links.has_key?(expected)
