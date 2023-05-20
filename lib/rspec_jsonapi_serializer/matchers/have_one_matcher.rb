@@ -13,6 +13,10 @@ module RSpecJSONAPISerializer
         association_matcher.matches?(serializer_instance)
       end
 
+      def description
+        association_matcher.description
+      end
+
       def main_failure_message
         association_matcher.main_failure_message
       end

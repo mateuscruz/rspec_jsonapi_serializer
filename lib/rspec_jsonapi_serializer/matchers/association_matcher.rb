@@ -19,6 +19,12 @@ module RSpecJSONAPISerializer
                      .has_key?(expected)
       end
 
+      def description
+        description = "#{association_message} #{expected}"
+
+        [description, submatchers.map(&:description)].flatten.join(' ')
+      end
+
       def main_failure_message
         [expected_message, actual_message].compact.join(", ")
       end
@@ -36,7 +42,7 @@ module RSpecJSONAPISerializer
       end
 
       def association_message
-        relationship_matcher.to_s.split('_')
+        relationship_matcher.to_s.split("_").join(" ")
       end
 
       def actual
