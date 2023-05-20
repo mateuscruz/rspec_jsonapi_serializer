@@ -24,11 +24,25 @@ module RSpecJSONAPISerializer
         self
       end
 
+      def description
+        description = "have attributed #{expected}"
+
+        [description, submatchers.map(&:description)].flatten.join(' ')
+      end
+
       def main_failure_message
-        "expected #{serializer_name} to have attribute #{expected}." unless has_attribute?
+        "expected #{expectation}."
+      end
+
+      def main_failure_message_when_negated
+        "Did not expect #{expectation}."
       end
 
       private
+
+      def expectation
+        "#{serializer_name} to have attribute #{expected}"
+      end
 
       def attributes
         @attributes ||= serializer_instance.class.try(:attributes_to_serialize) || {}
