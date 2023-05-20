@@ -23,7 +23,7 @@ module RSpecJSONAPISerializer
       end
 
       def description
-        description = "have attributed #{expected}"
+        description = "have attribute #{expected}"
 
         [description, submatchers.map(&:description)].flatten.join(' ')
       end
