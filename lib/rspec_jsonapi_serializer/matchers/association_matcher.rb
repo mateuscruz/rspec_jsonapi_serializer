@@ -44,24 +44,32 @@ module RSpecJSONAPISerializer
         [expected_message, actual_message].compact.join(", ")
       end
 
+      def main_failure_message_when_negated
+        [expected_message(expectation: "not to"), actual_message].compact.join(", ")
+      end
+
       private
 
       attr_reader :relationship_matcher, :relationship_type
 
-      def expected_message
-        "expected #{serializer_name} to #{association_message} #{expected}"
+      def expected_message(expectation: "to")
+        "expected #{serializer_name} #{expectation} #{association_message} #{expected}"
       end
 
       def relationship_matches?
-        actual.present? && actual.relationship_type == relationship_type
+        actual.present? && actual_relationship_type == relationship_type
       end
 
       def actual_message
-        actual ? "got :#{actual.relationship_type} instead" : nil
+        actual && actual_relationship_type != relationship_type ? "got :#{actual_relationship_type} instead" : nil
       end
 
       def association_message
-        relationship_matcher.to_s.split('_')
+        relationship_matcher.to_s.split("_").join(" ")
+      end
+
+      def actual_relationship_type
+        actual.relationship_type
       end
 
       def actual

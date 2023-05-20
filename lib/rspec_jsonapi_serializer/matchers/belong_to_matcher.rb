@@ -25,6 +25,10 @@ module RSpecJSONAPISerializer
         association_matcher.serializer(value)
       end
 
+      def failure_message_when_negated
+        association_matcher.failure_message_when_negated
+      end
+
       def main_failure_message
         association_matcher.main_failure_message
       end
