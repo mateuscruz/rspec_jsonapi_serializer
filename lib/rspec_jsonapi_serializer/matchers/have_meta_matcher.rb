@@ -24,7 +24,7 @@ module RSpecJSONAPISerializer
         self
       end
 
-      def main_failure_message
+      def failure_message
         "expected #{serializer_name} to serialize meta #{expected}." unless has_meta?
       end
 

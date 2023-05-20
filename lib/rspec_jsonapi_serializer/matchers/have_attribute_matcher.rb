@@ -19,9 +19,7 @@ module RSpecJSONAPISerializer
       end
 
       def as_nil
-        add_submatcher HaveAttributeMatchers::AsMatcher.new(expected, nil)
-
-        self
+        as(nil)
       end
 
       def description
@@ -30,18 +28,24 @@ module RSpecJSONAPISerializer
         [description, submatchers.map(&:description)].flatten.join(' ')
       end
 
-      def main_failure_message
-        "expected #{expectation}."
+      def failure_message
+        "Expected #{expectation}."
       end
 
-      def main_failure_message_when_negated
+      def failure_message_when_negated
         "Did not expect #{expectation}."
       end
 
       private
 
       def expectation
-        "#{serializer_name} to have attribute #{expected}"
+        expectation = "#{serializer_name} to have attribute #{expected}"
+
+        submatchers_expectations = failing_submatchers.map do |submatcher|
+          "(#{submatcher.expectation})"
+        end.compact.join(", ")
+
+        [expectation, submatchers_expectations].reject(&:nil?).reject(&:empty?).join(" ")
       end
 
       def attributes
