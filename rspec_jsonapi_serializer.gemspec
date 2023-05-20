@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Mateus Cruz"]
   spec.email         = ["mateus@intricately.com"]
   spec.summary       = "RSpec matchers for jsonapi-serializer."
-  spec.homepage      = "https://github.com/teamintricately/rspec_jsonapi_serializer"
+  spec.homepage      = "https://github.com/mateuscruz/rspec_jsonapi_serializer"
   spec.license       = "MIT"
   spec.required_ruby_version = Gem::Requirement.new(">= 2.4.0")
   spec.metadata["homepage_uri"] = spec.homepage
