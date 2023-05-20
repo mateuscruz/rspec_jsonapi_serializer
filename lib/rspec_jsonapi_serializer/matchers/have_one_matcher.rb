@@ -17,8 +17,8 @@ module RSpecJSONAPISerializer
         association_matcher.description
       end
 
-      def main_failure_message
-        association_matcher.main_failure_message
+      def failure_message
+        association_matcher.failure_message
       end
 
       private

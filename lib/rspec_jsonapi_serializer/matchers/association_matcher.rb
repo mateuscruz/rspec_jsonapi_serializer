@@ -25,7 +25,7 @@ module RSpecJSONAPISerializer
         [description, submatchers.map(&:description)].flatten.join(' ')
       end
 
-      def main_failure_message
+      def failure_message
         [expected_message, actual_message].compact.join(", ")
       end
 
