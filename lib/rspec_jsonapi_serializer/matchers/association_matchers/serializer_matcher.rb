@@ -22,16 +22,20 @@ module RSpecJSONAPISerializer
           [expected_message, actual_message].compact.join(", ")
         end
 
+        def main_failure_message_when_negated
+          [expected_message(expectation: "not to"), actual_message].compact.join(", ")
+        end
+
         private
 
         attr_reader :relationship_target
 
-        def expected_message
-          "expected #{serializer_name} to use #{expected} as serializer for #{relationship_target}"
+        def expected_message(expectation: "to")
+          "expected #{serializer_name} #{expectation} use #{expected} as serializer for #{relationship_target}"
         end
 
         def actual_message
-          actual ? "got #{actual} instead" : nil
+          actual != expected ? "got #{actual} instead" : nil
         end
 
         def actual
