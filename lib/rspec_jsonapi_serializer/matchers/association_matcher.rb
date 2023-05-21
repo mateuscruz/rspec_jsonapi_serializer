@@ -69,11 +69,18 @@ module RSpecJSONAPISerializer
       end
 
       def relationship_matches?
-        actual.present? && actual_relationship_type == relationship_type
+        actual.present? && actual_relationship_type == relationship_type &&
+        actual_rendered?
       end
 
       def association_message
         relationship_matcher.to_s.split("_").join(" ")
+      end
+
+      def actual_rendered?
+        relationships = serializable_hash.dig(:data, :relationships)
+
+        relationships.key?(expected) || relationships.key?(expected.to_s)
       end
 
       def actual_relationship_type
