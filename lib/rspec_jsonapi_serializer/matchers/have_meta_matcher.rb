@@ -39,7 +39,13 @@ module RSpecJSONAPISerializer
       private
 
       def expectation
-        "#{serializer_name} to serialize meta #{expected}"
+        expectation = "#{serializer_name} to serialize meta #{expected}"
+
+        submatchers_expectations = failing_submatchers.map do |submatcher|
+          "(#{submatcher.expectation})"
+        end.compact.join(", ")
+
+        [expectation, submatchers_expectations].reject(&:nil?).reject(&:empty?).join(" ")
       end
 
       def metas
