@@ -19,16 +19,34 @@ module RSpecJSONAPISerializer
       end
 
       def as_nil
-        add_submatcher HaveMetaMatchers::AsMatcher.new(expected, nil)
-
-        self
+        as(nil)
       end
 
-      def main_failure_message
-        "expected #{serializer_name} to serialize meta #{expected}." unless has_meta?
+      def description
+        description = "serialize meta #{expected}"
+
+        [description, submatchers.map(&:description)].flatten.join(' ')
+      end
+
+      def failure_message
+        "Expected #{expectation}."
+      end
+
+      def failure_message_when_negated
+        "Did not expect #{expectation}."
       end
 
       private
+
+      def expectation
+        expectation = "#{serializer_name} to serialize meta #{expected}"
+
+        submatchers_expectations = failing_submatchers.map do |submatcher|
+          "(#{submatcher.expectation})"
+        end.compact.join(", ")
+
+        [expectation, submatchers_expectations].reject(&:nil?).reject(&:empty?).join(" ")
+      end
 
       def metas
         @metas ||= serializable_hash.dig(:data, :meta) || {}

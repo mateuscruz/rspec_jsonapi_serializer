@@ -40,28 +40,36 @@ module RSpecJSONAPISerializer
         self
       end
 
-      def main_failure_message
-        [expected_message, actual_message].compact.join(", ")
+      def description
+        description = "#{association_message} #{expected}"
+
+        [description, submatchers.map(&:description)].flatten.join(' ')
       end
 
-      def main_failure_message_when_negated
-        [expected_message(expectation: "not to"), actual_message].compact.join(", ")
+      def failure_message
+        "Expected #{expectation}"
+      end
+
+      def failure_message_when_negated
+        "Did not expect #{expectation}"
       end
 
       private
 
       attr_reader :relationship_matcher, :relationship_type
 
-      def expected_message(expectation: "to")
-        "expected #{serializer_name} #{expectation} #{association_message} #{expected}"
+      def expectation
+        expectation = "#{serializer_name} to #{association_message} #{expected}"
+
+        submatchers_expectations = failing_submatchers.map do |submatcher|
+          "(#{submatcher.expectation})"
+        end.compact.join(", ")
+
+        [expectation, submatchers_expectations].reject(&:nil?).reject(&:empty?).join(" ")
       end
 
       def relationship_matches?
         actual.present? && actual_relationship_type == relationship_type
-      end
-
-      def actual_message
-        actual && actual_relationship_type != relationship_type ? "got :#{actual_relationship_type} instead" : nil
       end
 
       def association_message
