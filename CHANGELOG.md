@@ -1,5 +1,8 @@
 ## [Unreleased]
 
+## [1.2.1] - 2023-05-20
+
+- Backport v1.1.2
 - Add default description for relationship id_method_name submatcher
 
 ## [1.2.0] - 2021-05-26
@@ -12,6 +15,7 @@
 
 ## [1.1.1] - 2023-05-20
 
+- Backport v1.0.1
 - Add default description for relationship serializer submatcher
 
 ## [1.1.0] - 2021-04-15
