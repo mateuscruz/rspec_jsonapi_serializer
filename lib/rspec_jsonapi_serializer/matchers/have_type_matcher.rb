@@ -11,7 +11,7 @@ module RSpecJSONAPISerializer
         actual == expected
       end
 
-      def main_failure_message
+      def failure_message
         "expected that #{serializer_name} to have type :#{expected}, got :#{actual} instead"
       end
 
