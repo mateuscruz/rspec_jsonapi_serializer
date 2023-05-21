@@ -33,15 +33,25 @@ module RSpecJSONAPISerializer
       end
 
       def failure_message
-        [expected_message, actual_message].compact.join(", ")
+        "Expected #{expectation}"
+      end
+
+      def failure_message_when_negated
+        "Did not expect #{expectation}"
       end
 
       private
 
       attr_reader :relationship_matcher, :relationship_type
 
-      def expected_message
-        "expected #{serializer_name} to #{association_message} #{expected}"
+      def expectation
+        expectation = "#{serializer_name} to #{association_message} #{expected}"
+
+        submatchers_expectations = failing_submatchers.map do |submatcher|
+          "(#{submatcher.expectation})"
+        end.compact.join(", ")
+
+        [expectation, submatchers_expectations].reject(&:nil?).reject(&:empty?).join(" ")
       end
 
       def relationship_matches?
