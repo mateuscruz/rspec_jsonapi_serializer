@@ -1,5 +1,7 @@
 ## [Unreleased]
 
+- Fix relationship matchers with conditional procs
+
 ## [1.3.1] - 2023-05-20
 
 - Backport v1.2.1
