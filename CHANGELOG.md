@@ -1,7 +1,10 @@
 ## [Unreleased]
 
+## [1.0.1] - 2023-05-20
+
 - Add default description for have_attribute matcher and submatchers
 - Add default description for have_link matcher and submatchers
+- Add default description for have_meta matcher and submatchers
 
 ## [1.0.0] - 2021-04-10
 
