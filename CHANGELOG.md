@@ -1,5 +1,7 @@
 ## [Unreleased]
 
+## [1.3.2] - 2023-05-21
+
 - Fix relationship matchers with conditional procs
 
 ## [1.3.1] - 2023-05-20
