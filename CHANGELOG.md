@@ -1,5 +1,8 @@
 ## [Unreleased]
 
+## [1.3.1] - 2023-05-20
+
+- Backport v1.2.1
 - Add default description for relationship object_method_name submatcher
 
 ## [1.3.0] - 2023-05-19
