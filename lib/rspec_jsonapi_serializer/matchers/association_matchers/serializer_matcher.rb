@@ -18,17 +18,17 @@ module RSpecJSONAPISerializer
           actual == expected
         end
 
-        def main_failure_message
-          [expected_message, actual_message].compact.join(", ")
+        def description
+          "with serializer #{expected}"
+        end
+
+        def expectation
+          [ "with serializer #{expected}", actual_message ].compact.join(", ")
         end
 
         private
 
         attr_reader :relationship_target
-
-        def expected_message
-          "expected #{serializer_name} to use #{expected} as serializer for #{relationship_target}"
-        end
 
         def actual_message
           actual ? "got #{actual} instead" : nil

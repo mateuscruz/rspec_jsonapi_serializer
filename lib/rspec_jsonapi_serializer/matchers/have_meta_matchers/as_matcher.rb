@@ -18,21 +18,32 @@ module RSpecJSONAPISerializer
           actual == expected
         end
 
-        def failure_message
-          [expected_message, actual_message].compact.join(", ")
+        def description
+          "as #{expected_to_string}"
+        end
+
+        def expectation
+          [ "as #{expected_to_string}", actual_message ].compact.join(", ")
         end
 
         private
 
         attr_reader :meta
 
-        def expected_message
-          "expected #{serializer_instance.class.name} to serialize meta #{meta} as #{expected}"
+        def expected_to_string
+          value_to_string(expected)
         end
 
         def actual_message
           "got #{actual.nil? ? 'nil' : actual} instead" if metas.has_key?(meta)
         end
+
+        def value_to_string(value)
+          return 'nil' if value.nil?
+
+          value.to_s
+        end
+
 
         def actual
           metas[meta]
