@@ -1,5 +1,7 @@
 ## [Unreleased]
 
+## [1.1.2] - 2023-05-20
+
 - Add failure message when negated for relationship matchers
 
 ## [1.1.1] - 2023-05-20
