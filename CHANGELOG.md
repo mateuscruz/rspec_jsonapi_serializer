@@ -1,5 +1,7 @@
 ## [Unreleased]
 
+## [1.1.1] - 2023-05-20
+
 - Add default description for relationship serializer submatcher
 
 ## [1.1.0] - 2021-04-15
