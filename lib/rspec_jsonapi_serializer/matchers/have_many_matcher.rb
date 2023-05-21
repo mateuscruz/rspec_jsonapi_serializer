@@ -29,6 +29,10 @@ module RSpecJSONAPISerializer
         association_matcher.failure_message
       end
 
+      def failure_message_when_negated
+        association_matcher.failure_message_when_negated
+      end
+
       private
 
       attr_reader :association_matcher
